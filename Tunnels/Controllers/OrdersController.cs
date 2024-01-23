@@ -54,7 +54,7 @@ namespace Tunnels.Controllers {
         /// <param name="orderId"></param>
         /// <returns></returns>
         [HttpDelete("{orderId}")]
-        public async Task<ActionResult<CreateOrderResponse>> UpdateOrder([FromQuery] int orderId) {
+        public async Task<ActionResult<CreateOrderResponse>> UpdateOrder([FromRoute] int orderId) {
 
             await _orderService.InvalidateOrder(orderId);
 
