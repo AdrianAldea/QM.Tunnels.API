@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Tunnels.Core;
 using Tunnels.Core.Mappers;
@@ -30,6 +31,15 @@ namespace Tunnels.Services {
             var orders = await _unitOfWork.Orders.GetAllOrdersWithProductsByFilterAsync(ordersWithProductsFilter);
             var ordersView = OrdersWithProductsMapper.Map(orders);
             return ordersView;
+        }
+
+        public async Task<double> GetSumOfOrders(OrdersWithProductsFilterRequest ordersWithProductsFilter)
+        {
+            var orders = await _unitOfWork.Orders.GetAllOrdersWithProductsByFilterAsync(ordersWithProductsFilter);
+            var ordersView = OrdersWithProductsMapper.Map(orders);
+
+            var ordersSum = ordersView.Sum(x => x.TotalProduct);
+            return ordersSum;
         }
     }
 }

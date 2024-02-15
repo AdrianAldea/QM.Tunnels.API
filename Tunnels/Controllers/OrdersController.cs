@@ -72,8 +72,21 @@ namespace Tunnels.Controllers {
         [HttpPost("GetAllOrdersWithProductsByFilterAsync")]
         public async Task<ActionResult<List<OrdersWithProductsView>>> GetAllOrdersWithProductsByFilterAsync(OrdersWithProductsFilterRequest ordersWithProductsFilter) {
             var Orders = await _orderService.GetAllOrdersWithProductsByFilterAsync(ordersWithProductsFilter);
-
+            
             return Ok(Orders);
+        }
+
+        /// <summary>
+        /// GetSumOfOrders
+        /// </summary>
+        /// <param name="ordersWithProductsFilter"></param>
+        /// <returns>Sum of Orders</returns>
+        [HttpPost("GetSumOfOrders")]
+        public async Task<ActionResult<double>> GetSumOfOrders(OrdersWithProductsFilterRequest ordersWithProductsFilter)
+        {
+            var sum = await _orderService.GetSumOfOrders(ordersWithProductsFilter);
+
+            return Ok(sum);
         }
 
         ///// <summary>
