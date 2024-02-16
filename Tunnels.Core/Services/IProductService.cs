@@ -6,5 +6,6 @@ namespace Tunnels.Core.Services {
     public interface IProductService {
         Task DeleteById(int id);
         Task<IEnumerable<Product>> GetAllProducts(bool? isActive);
+        Task UpdateAllProducts(IEnumerable<Product> products);
     }
 }

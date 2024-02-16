@@ -40,6 +40,24 @@ namespace Tunnels.Controllers {
 
         #region Delete
 
+        [HttpPost("")]
+        public async Task<ActionResult<GetProductResponse>> UpdateAllProducts([FromBody] List<Product> products)
+        {
+            await _productService.UpdateAllProducts(products);
+
+            List<GetProductResponse> result = new List<GetProductResponse>();
+            foreach (var product in products)
+            {
+                var getProductsResponse = _mapper.Map<Product, GetProductResponse>(product);
+                result.Add(getProductsResponse);
+            }
+            return Ok(result);
+        }
+
+        #endregion
+
+        #region Delete
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteById([FromRoute] int id) {
             await _productService.DeleteById(id);

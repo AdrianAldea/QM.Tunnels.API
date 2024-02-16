@@ -5,7 +5,8 @@ using Tunnels.Core.Models;
 using Tunnels.Core.Services;
 
 namespace Tunnels.Services {
-    public class ProductService : IProductService {
+    public class ProductService : IProductService
+    {
 
         private readonly IUnitOfWork _unitOfWork;
         public ProductService(IUnitOfWork unitOfWork) {
@@ -18,6 +19,11 @@ namespace Tunnels.Services {
 
         public async Task<IEnumerable<Product>> GetAllProducts(bool? isActive) {
             return await _unitOfWork.Products.GetAllProductsAsync(isActive);
+        }
+
+        public async Task UpdateAllProducts(IEnumerable<Product> products)
+        {
+            await _unitOfWork.Products.UpdateAll(products);
         }
     }
 }

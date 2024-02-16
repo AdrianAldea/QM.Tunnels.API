@@ -27,6 +27,12 @@ namespace Tunnels.DAL.Repositories {
             await TunnelsDbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateAll(IEnumerable<Product> products)
+        {
+            TunnelsDbContext.Products.UpdateRange(products);
+            await TunnelsDbContext.SaveChangesAsync();
+        }
+
         private TunnelsDbContext TunnelsDbContext => Context as TunnelsDbContext;
     }
 }
