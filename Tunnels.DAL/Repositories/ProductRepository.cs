@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Tunnels.Core.Models;
 using Tunnels.Core.Repositories;
@@ -29,6 +31,11 @@ namespace Tunnels.DAL.Repositories {
 
         public async Task UpdateAll(IEnumerable<Product> products)
         {
+            // Update CurrentValue
+            foreach (var product in products) 
+            {
+                product.CurrentValue = Math.Round(product.BuyPrice * product.CurrentQuantity, 2);
+            }
             TunnelsDbContext.Products.UpdateRange(products);
             await TunnelsDbContext.SaveChangesAsync();
         }
